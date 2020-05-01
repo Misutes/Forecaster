@@ -1,13 +1,14 @@
 from sklearn.neural_network import MLPRegressor
-from sklearn.metrics import mean_squared_error as mse
 import matplotlib.pyplot as plt
 from DataFrame_org import learning_dataframe, future_days_columns
+
 
 finally_dataframe = learning_dataframe()
 
 
-def machin_learning():
-    MLP = MLPRegressor(max_iter=52, hidden_layer_sizes=117)
+
+def building_model(max_iter, hidden_layer_sizes):
+    MLP = MLPRegressor(max_iter=max_iter, hidden_layer_sizes=hidden_layer_sizes)
     X, Y = finally_dataframe[:2]
     MLP.fit(X, Y)
     return MLP
@@ -24,6 +25,3 @@ def visualization(ml_model):
     plt.show()
 
 
-
-
-visualization(machin_learning())
