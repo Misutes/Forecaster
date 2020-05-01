@@ -33,6 +33,3 @@ def dataframe_formation(date):
 def learning_dataframe():
     date = learning_date()
     return dataframe_formation(date)
-
-
-learning_dataframe()
