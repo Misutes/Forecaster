@@ -6,7 +6,6 @@ from DataFrame_org import learning_dataframe, future_days_columns
 finally_dataframe = learning_dataframe()
 
 
-
 def building_model(max_iter, hidden_layer_sizes):
     MLP = MLPRegressor(max_iter=max_iter, hidden_layer_sizes=hidden_layer_sizes)
     X, Y = finally_dataframe[:2]
