@@ -23,14 +23,12 @@ def test_parameters(dataframe, network):
     real_rates = Y_test.iloc[0]
     global_error_dict = {}
     local_error_dict = {}
-    limit_par_one = [50, 250]
-    step_par_one = 1
-    limit_par_two = [10, 250]
-    step_par_two = 1
-    for (i, par_one) in zip(range(*limit_par_one), range(*limit_par_one, step_par_one)):
+    limit_par_one = [50, 60, 1]
+    limit_par_two = [10, 15, 1]
+    for (i, par_one) in zip(range(1, limit_par_one[1]), range(*limit_par_one)):
         global_error_dict.setdefault(f'par_one_{i}')
         global_error_dict[f'par_one_{i}'] = {}
-        for (j, par_two) in zip(range(*limit_par_two), range(*limit_par_two, step_par_two)):
+        for (j, par_two) in zip(range(1, limit_par_two[1]), range(*limit_par_two)):
             model = network(par_one, par_two)
             prediction = model.predict([X_test.iloc[0]])
             global_error_dict[f'par_one_{i}'].setdefault(f'par_two_{j}', mse(real_rates, prediction[0]))
@@ -38,9 +36,9 @@ def test_parameters(dataframe, network):
         min_error = min(global_error_dict[f'par_one_{i}'].items(), key=lambda x: x[1])
         local_error_dict[f'par_one_{i}'] = min_error
     main_error = min(local_error_dict.items(), key=lambda x: x[1][1])
-    print('mean square deviation:', main_error[1][1])
     max_iter = main_error[0].split('_')[2]
     hidden_layer_sizes = main_error[1][0].split('_')[2]
+    print(main_error)
     print(f'max_iter: {max_iter}', f'hidden_layer_sizes: {hidden_layer_sizes}')
 
 
