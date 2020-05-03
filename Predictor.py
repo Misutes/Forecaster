@@ -22,3 +22,6 @@ def visualization(network):
     plt.plot(prediction[0], label='prediction')
     plt.legend()
     plt.show()
+
+
+visualization(building_model(177, 242))

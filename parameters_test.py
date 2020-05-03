@@ -16,6 +16,8 @@ def timeit(function):
     return wrapper
 
 
+
+
 @timeit
 def test_parameters(dataframe, network):
     print('Start testing')
@@ -23,10 +25,13 @@ def test_parameters(dataframe, network):
     real_rates = y_test[0]
     global_error_dict = {}
     local_error_dict = {}
-    limit_par_one = [50, 60]
+    limit_par_one = [50, 250]
     step_par_one = 1
-    limit_par_two = [10, 30]
+    limit_par_two = [10, 250]
     step_par_two = 1
+
+    def layers_test():
+        pass
     for (i, par_one) in zip(range(*limit_par_one), range(*limit_par_one, step_par_one)):
         global_error_dict.setdefault(f'par_one_{i}')
         global_error_dict[f'par_one_{i}'] = {}
@@ -44,4 +49,4 @@ def test_parameters(dataframe, network):
     print(f'max_iter: {max_iter}', f'hidden_layer_sizes: {hidden_layer_sizes}')
 
 
-
+#test_parameters(finally_dataframe, building_model)
