@@ -1,7 +1,6 @@
 from sklearn.neural_network import MLPRegressor
 import matplotlib.pyplot as plt
-from DataFrame_org import learning_dataframe, days_columns
-
+from DataFrame_org import learning_dataframe
 
 finally_dataframe = learning_dataframe()
 
@@ -23,5 +22,4 @@ def visualization(network):
     plt.legend()
     plt.show()
 
-
-visualization(building_model(177, 242))
+# visualization(building_model(177, [5, 5]))

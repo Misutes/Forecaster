@@ -5,7 +5,7 @@ import xml.etree.ElementTree as ET
 
 def get_url():
     val_nm_rq = 'R01235'
-    start_date = '01/01/2015'
+    start_date = '01/01/2016'
     end_date = '01/01/2018'
     url = f'http://www.cbr.ru/scripts/XML_dynamic.asp?date_req1={start_date}&date_req2={end_date}&VAL_NM_RQ={val_nm_rq}'
     return url
