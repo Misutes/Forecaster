@@ -1,6 +1,7 @@
 from datetime import datetime
 
 
+# time counter decorator
 def timeit(function):
     def wrapper(*args):
         start = datetime.now()
@@ -8,4 +9,5 @@ def timeit(function):
         end = datetime.now()
         print(f'Function has worked: {end - start}')
         return result
+
     return wrapper

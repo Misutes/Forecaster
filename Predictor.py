@@ -5,6 +5,7 @@ from DataFrame_org import learning_dataframe
 finally_dataframe = learning_dataframe()
 
 
+# creating and training model
 def building_model(max_iter, hidden_layer_sizes):
     MLP = MLPRegressor(max_iter=max_iter, hidden_layer_sizes=hidden_layer_sizes, random_state=42)
     x_train, y_train = finally_dataframe[:2]
@@ -12,6 +13,7 @@ def building_model(max_iter, hidden_layer_sizes):
     return MLP
 
 
+# data visualization
 def visualization(network):
     model = network
     x_test, y_test = finally_dataframe[2:]

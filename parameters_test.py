@@ -7,6 +7,7 @@ import itertools
 finally_dataframe = learning_dataframe()
 
 
+# selection of parameters with the minimum standard deviation the test sample
 @timeit
 def test_parameters(dataframe, network):
     print('Start testing')
@@ -19,11 +20,12 @@ def test_parameters(dataframe, network):
     limit_par_two = [50, 250]
     step_par_two = 1
 
+    # selection quantity of hidden_layers
     def layers_test(size):
         global_layers = []
         right_list, revers_list = list(range(1, size)), list(reversed(range(1, size)))
         max_layers = 3
-        for length in range(1, max_layers+1):
+        for length in range(1, max_layers + 1):
             right_layers = (
                 [list(x) for x in itertools.combinations_with_replacement(right_list, length) if sum(x) == size])
             reverse_layers = sorted(
