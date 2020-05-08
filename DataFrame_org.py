@@ -2,6 +2,7 @@ import pandas as pd
 import Parser
 import numpy as np
 
+
 exchange_rates = Parser.get_exchange_rates()
 
 # formation constant

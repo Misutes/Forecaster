@@ -4,6 +4,7 @@ from DataFrame_org import learning_dataframe
 from Main import timeit
 import itertools
 
+
 finally_dataframe = learning_dataframe()
 
 
@@ -21,40 +22,42 @@ def test_parameters(dataframe, network):
     step_par_two = 1
 
     # selection quantity of hidden_layers
-    def layers_test(size):
-        global_layers = []
-        right_list, revers_list = list(range(1, size)), list(reversed(range(1, size)))
-        max_layers = 3
-        for length in range(1, max_layers + 1):
-            right_layers = (
-                [list(x) for x in itertools.combinations_with_replacement(right_list, length) if sum(x) == size])
-            reverse_layers = sorted(
-                [list(x) for x in itertools.combinations_with_replacement(revers_list, length) if sum(x) == size])
-            local_layers = right_layers + reverse_layers
-            if not len(local_layers):
-                global_layers.append([size])
-            if len(local_layers):
-                for x in local_layers:
-                    permutation = list(itertools.permutations(x, length))
-                    for y in range(len(permutation)):
-                        obj = list(permutation[y])
-                        if obj not in global_layers:
-                            global_layers.append(obj)
-        return global_layers
+    def layers_test():
+        list_layers = []
+        max_layers = 2
+        for layer in range(*limit_par_two, step_par_two):
+            print(layer)
+            right_list, revers_list = list(range(1, layer)), list(reversed(range(1, layer)))
+            for length in range(1, max_layers + 1):
+                right_layers = (
+                    [list(x) for x in itertools.combinations_with_replacement(right_list, length) if sum(x) == layer])
+                reverse_layers = sorted(
+                    [list(x) for x in itertools.combinations_with_replacement(revers_list, length) if sum(x) == layer])
+                local_layers = right_layers + reverse_layers
+                if not len(local_layers):
+                    list_layers.append([layer])
+                if len(local_layers):
+                    for y in local_layers:
+                        permutation = list(itertools.permutations(y, length))
+                        for z in range(len(permutation)):
+                            obj = list(permutation[z])
+                            if obj not in list_layers:
+                                list_layers.append(obj)
+        return list_layers
 
-    for (i, par_one) in zip(range(*limit_par_one), range(*limit_par_one, step_par_one)):
-        global_error_dict.setdefault(f'par_one_{i}')
-        global_error_dict[f'par_one_{i}'] = {}
-        for (j, par_two) in zip(range(*limit_par_two), range(*limit_par_two, step_par_two)):
-            global_layers = layers_test(par_two)
-            for element in global_layers:
-                model = network(par_one, element)
-                prediction = model.predict([x_test[0]])
-                global_error_dict[f'par_one_{i}'].setdefault(f'par_two_{element}', mse(real_rates, prediction[0]))
-        local_error_dict.setdefault(f'par_one_{i}')
-        min_error = min(global_error_dict[f'par_one_{i}'].items(), key=lambda x: x[1])
+    global_layers = layers_test()
+    print(global_layers)
+    for par_one in range(*limit_par_one, step_par_one):
+        global_error_dict.setdefault(f'par_one_{par_one}')
+        global_error_dict[f'par_one_{par_one}'] = {}
+        for element in global_layers:
+            model = network(par_one, element)
+            prediction = model.predict([x_test[0]])
+            global_error_dict[f'par_one_{par_one}'].setdefault(f'par_two_{element}', mse(real_rates, prediction[0]))
+        local_error_dict.setdefault(f'par_one_{par_one}')
+        min_error = min(global_error_dict[f'par_one_{par_one}'].items(), key=lambda x: x[1])
         if float(min_error[1]) >= .01:
-            local_error_dict[f'par_one_{i}'] = min_error
+            local_error_dict[f'par_one_{par_one}'] = min_error
     main_error = min(local_error_dict.items(), key=lambda x: x[1][1])
     print('mean square deviation:', main_error[1][1])
     max_iter = main_error[0].split('_')[2]
