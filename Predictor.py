@@ -17,11 +17,9 @@ def building_model(max_iter, hidden_layer_sizes):
 def visualization(network):
     model = network
     x_test, y_test = finally_dataframe[2:]
-    prediction = model.predict([x_test[2]])
+    test_prediction = model.predict([x_test[2]])
     real_rates = y_test[2]
     plt.plot(real_rates, label='real')
-    plt.plot(prediction[0], label='prediction')
-    plt.legend()
-    plt.show()
+    plt.plot(test_prediction[0], label='prediction')
+    plt.savefig('flask_app/static/plot.png')
 
-# visualization(building_model(177, [5, 5]))

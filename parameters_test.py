@@ -1,7 +1,7 @@
 from sklearn.metrics import mean_squared_error as mse
 from Predictor import building_model
 from DataFrame_org import learning_dataframe
-from Main import timeit
+from Global import timeit
 import itertools
 
 

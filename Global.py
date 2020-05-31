@@ -1,4 +1,7 @@
 from datetime import datetime
+from flask_app.app import application
+import flask_app.view
+from Predictor import building_model, visualization
 
 
 # time counter decorator
@@ -11,3 +14,7 @@ def timeit(function):
         return result
 
     return wrapper
+
+
+if __name__ == '__main__':
+    application.run()
